@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginUserRequest;
 use App\Models\User;
 use App\Traits\ApiResponses;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -21,12 +22,21 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         return $this->ok($request->get('email'), [
-            'token' => $user->createToken('API Token for ' . $request->get('email'))->plainTextToken
+            'token' => $user->createToken(
+                'API Token for ' . $request->get('email'),
+                ['*'],
+                now()->addMonth())->plainTextToken
         ]);
     }
 
     public function register()
     {
         return $this->ok('register', []);
+    }
+
+    public function logout(Request $request) {
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->ok('logout');
     }
 }

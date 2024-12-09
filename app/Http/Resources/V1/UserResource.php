@@ -28,6 +28,10 @@ class UserResource extends JsonResource
                         "updated_at" => $this->updated_at
                     ]
                 )
+            ],
+            "includes" => TicketResource::collection($this->whenLoaded('tickets')),
+            "links" => [
+                "self" => route("api.v1users.show", $this->id)
             ]
         ];
     }

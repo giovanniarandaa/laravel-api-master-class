@@ -24,8 +24,8 @@ class UserResource extends JsonResource
                     $request->routeIs('api.v1authors.*'),
                     [
                         "email_verified_at" => $this->email_verified_at,
-                        "created_at" => $this->created_at,
-                        "updated_at" => $this->updated_at
+                        "createdAt" => $this->created_at,
+                        "updatedAt" => $this->updated_at
                     ]
                 )
             ],

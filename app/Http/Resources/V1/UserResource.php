@@ -21,7 +21,7 @@ class UserResource extends JsonResource
                 "name" => $this->name,
                 "email" => $this->email,
                 $this->mergeWhen(
-                    $request->routeIs('api.v1users.*'),
+                    $request->routeIs('api.v1authors.*'),
                     [
                         "email_verified_at" => $this->email_verified_at,
                         "created_at" => $this->created_at,
@@ -31,7 +31,7 @@ class UserResource extends JsonResource
             ],
             "includes" => TicketResource::collection($this->whenLoaded('tickets')),
             "links" => [
-                "self" => route("api.v1users.show", $this->id)
+                "self" => route("api.v1authors.show", $this->id)
             ]
         ];
     }
